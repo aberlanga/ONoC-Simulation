@@ -57,13 +57,16 @@ def writeResults(logFile, tClocks,tSimulation, tProgram):
 #key1  = generateKey(config.nodeCount)         
 
 for i in range(0,len(config.benchmarks)):
-    logfile = nodeBenchmarkList[i]    
+    logFile = config.benchmarks[i]    
     startTime = time.time()
     nodeBenchmarkList = convXYtoNode(logFile)
     listLen = len(nodeBenchmarkList)
+    print logFile
+    print '-----------------' + '\n'
     print 'ListLength:' + str(listLen)
     reqCount = 0
     endFlag = False
+    config.isover = True
 
     t = 0
 
@@ -88,4 +91,4 @@ for i in range(0,len(config.benchmarks)):
     tProgram = time.time()-startTime
     print 'Time for Program: ' + str(tProgram)
 
-    writeResults(config.logFile, t,totalTime, tProgram)
+    writeResults(logFile, t,totalTime, tProgram)
