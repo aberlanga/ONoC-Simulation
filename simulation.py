@@ -50,32 +50,42 @@ def generateKey(nodeCount):
             key.append(randNum)
     return key
 
+def writeResults(logFile, tClocks,tSimulation, tProgram):
+    with open('results.log',"a") as resultFile:
+        resultFile.write(logFile + '    ' + str(tClocks) + '    ' + str(tSimulation) + '    ' + str(tProgram) + '\n')
+
+#key1  = generateKey(config.nodeCount)         
+
+for i in range(0,len(config.benchmarks)):
+    logfile = nodeBenchmarkList[i]    
+    startTime = time.time()
+    nodeBenchmarkList = convXYtoNode(logFile)
+    listLen = len(nodeBenchmarkList)
+    print 'ListLength:' + str(listLen)
+    reqCount = 0
+    endFlag = False
+
+    t = 0
+
+    while config.isover == False:
+        while  (t == nodeBenchmarkList[reqCount][4] and endFlag==False):
+            if reqCount+1 == listLen:
+                endFlag = True
+            config.activeReq.append(request(nodeBenchmarkList[reqCount][0],nodeBenchmarkList[reqCount][1],nodeBenchmarkList[reqCount][3],nodeBenchmarkList[reqCount][4],nodeBenchmarkList[reqCount][4],endFlag))
+            if endFlag == False:
+                reqCount += 1
+
+        for req in config.activeReq:
+            req.reqProcessing(t)
+        t += 1
 
 
-    
-startTime = time.time()
-nodeBenchmarkList = convXYtoNode(config.logFile)
-listLen = len(nodeBenchmarkList)
-print 'ListLength:' + str(listLen)
-reqCount = 0
-endFlag = False
-key1  = generateKey(config.nodeCount)
-t = 0
 
-while config.isover == False:
-    while  (t == nodeBenchmarkList[reqCount][4] and endFlag==False):
-        if reqCount+1 == listLen:
-            endFlag = True
-        config.activeReq.append(request(nodeBenchmarkList[reqCount][0],nodeBenchmarkList[reqCount][1],nodeBenchmarkList[reqCount][3],nodeBenchmarkList[reqCount][4],nodeBenchmarkList[reqCount][4],endFlag))
-        if endFlag == False:
-            reqCount += 1
+    print config.nodestate
+    print 'Optical Clock Cycles: '+ str(t)
+    totalTime = float(t)/(config.OCC*(10**9))
+    print 'Runtime: '+ str(totalTime) +'seconds'
+    tProgram = time.time()-startTime
+    print 'Time for Program: ' + str(tProgram)
 
-    for req in config.activeReq:
-    	req.reqProcessing(t)
-    t += 1
-
-print config.nodestate
-print 'Optical Clock Cycles: '+ str(t)
-totalTime = float(t)/(config.OCC*(10**9))
-print 'Runtime: '+ str(totalTime) +'seconds'
-print 'Time for Program: ' + str(time.time()-startTime)
+    writeResults(config.logFile, t,totalTime, tProgram)
