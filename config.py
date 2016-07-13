@@ -6,11 +6,13 @@ import os, sys
 path = '/home/aberlanga1/Desktop/ONoC-Simulation-master/Benchmark Data/16-core'
 dirs = os.listdir(path)
 benchmarks = []
+benchmarksOnly = []
 
 # Appends all benchmarks in directory into one list
 
 for file in dirs:
     benchmarks.append(file)
+    benchmarksOnly.append(file)
 for i in range(0,len(benchmarks)):
     benchmarks[i] = path + '/' + benchmarks[i]
 activeReq = []

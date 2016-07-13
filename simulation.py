@@ -16,7 +16,7 @@ def convXYtoNode(logFile):
             benchmarkLine = []
             benchmarkItems = line.split()
             for i in benchmarkItems:
-                benchmarkLine.append(int(i))
+                benchmarkLine.append(int(float(i)))
             benchmark.append(benchmarkLine)
 
     newBenchmark = []
@@ -57,16 +57,17 @@ def writeResults(logFile, tClocks,tSimulation, tProgram):
 #key1  = generateKey(config.nodeCount)         
 
 for i in range(0,len(config.benchmarks)):
-    logFile = config.benchmarks[i]    
     startTime = time.time()
+    logFile = config.benchmarks[i]    
     nodeBenchmarkList = convXYtoNode(logFile)
     listLen = len(nodeBenchmarkList)
-    print logFile
+    print config.benchmarksOnly[i]
     print '-----------------' + '\n'
     print 'ListLength:' + str(listLen)
     reqCount = 0
     endFlag = False
-    config.isover = True
+    config.isover = False
+    config.nodestate = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
     t = 0
 
@@ -91,4 +92,4 @@ for i in range(0,len(config.benchmarks)):
     tProgram = time.time()-startTime
     print 'Time for Program: ' + str(tProgram)
 
-    writeResults(logFile, t,totalTime, tProgram)
+    writeResults(config.benchmarksOnly[i], t,totalTime, tProgram)
