@@ -70,7 +70,7 @@ class request:
 
         #Transmission here
         if self.scheduled == True:
-            dataTransTime = (self.volume*config.packetSize)/(config.OCC*(10**9)) 
+            dataTransTime = (self.volume*config.packetSize)
             self.timeTrack += config.tChannelAloc + dataTransTime #insert addition parameters
             #self.transmitted = True
 
@@ -105,6 +105,7 @@ class request:
 
     def reqProcessing(self, t):
         if self.scheduled == False:
+
             self.schedule()
             
         # if (self.transmitted == False) & self.scheduled == True):

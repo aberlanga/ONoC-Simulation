@@ -83,9 +83,6 @@ randKey1  = generateKey(config.nodeCount)
 randKey2  = generateKey(config.nodeCount)
 randKey3  = generateKey(config.nodeCount)
 
-print randKey1
-print randKey2
-print randKey3
 
 currentReconfiguration = ""
 
@@ -125,11 +122,7 @@ for i in range(0,len(config.benchmarks)):
             nNKey = nn.nearestNeighbourKeygen(nodeBenchmarkList)
             nodeBenchmarkList = mapping(nNKey,nodeBenchmarkList)
             currentReconfiguration = "nNeighbor"
-	
-	print currentReconfiguration
-	for j in range(10):
-	      print nodeBenchmarkList[j]
-	      
+
         while config.isover == False:
             while  (t == nodeBenchmarkList[reqCount][4] and endFlag==False):
                 if reqCount+1 == listLen:
