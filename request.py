@@ -29,7 +29,7 @@ class request:
 		# first if triggers if direct (e.g. 123...14 15 16) path is the shortest or equadistant, elif triggers if opposite direction path is shorter
         if (self.destNode - self.sourceNode) <= (config.nodeCount - self.destNode + self.sourceNode):
 			# checks that path is available and if so reserves path
-            if (config.nodestate[self.sourceNode:(self.destNode +1)] == [False] * (self.destNode +1 - self.sourceNode)):     
+            if (config.nodestate[self.sourceNode:(self.destNode +1)] == [0] * (self.destNode +1 - self.sourceNode)):     
                 config.nodestate[self.sourceNode:(self.destNode +1)] = [1] * ((self.destNode +1) - self.sourceNode)
                 self.scheduled = True
                 self.timeTrack += config.tInitialize # insert time parameters
@@ -38,7 +38,7 @@ class request:
 
 
             elif (config.nodeCount - self.destNode + self.sourceNode) < config.weighted_cutoff:
-                if (config.nodestate[0:(self.sourceNode +1)] == [False] * (self.sourceNode +1)) & (config.nodestate[self.destNode:] == [False] * (config.nodeCount - self.destNode)):
+                if (config.nodestate[0:(self.sourceNode +1)] == [0] * (self.sourceNode +1)) & (config.nodestate[self.destNode:] == [0] * (config.nodeCount - self.destNode)):
                     for i in config.nodestate:
                         if i <= self.sourceNode | i >= self.destNode:
                             config.nodestate[i] = 1
@@ -49,14 +49,14 @@ class request:
             else:
                 self.timeTrack += 1
         else:
-            if (config.nodestate[0:(self.sourceNode +1)] == [False] * (self.sourceNode +1)) & (config.nodestate[self.destNode:] == [False] * (config.nodeCount - self.destNode)):
+            if (config.nodestate[0:(self.sourceNode +1)] == [0] * (self.sourceNode +1)) & (config.nodestate[self.destNode:] == [0] * (config.nodeCount - self.destNode)):
                 for i in config.nodestate:
                     if i <= self.sourceNode | i >= self.destNode:
                         config.nodestate[i] = 1
                 self.scheduled = True
                 self.timeTrack += config.tInitialize # insert time parameters
             elif (self.destNode - self.sourceNode) < config.weighted_cutoff:
-                if config.nodestate[self.sourceNode:(self.destNode +1)] == [False] * (self.destNode +1 - self.sourceNode):     
+                if config.nodestate[self.sourceNode:(self.destNode +1)] == [0] * (self.destNode +1 - self.sourceNode):     
                     config.nodestate[self.sourceNode:(self.destNode +1)] = [1] * ((self.destNode +1) - self.sourceNode)
                     self.scheduled = True
                     self.timeTrack += config.tInitialize # insert time parameters
@@ -70,7 +70,7 @@ class request:
 
         #Transmission here
         if self.scheduled == True:
-            dataTransTime = self.volume*config.packetSize/(config.OCC*(10**9)) 
+            dataTransTime = (self.volume*config.packetSize)/(config.OCC*(10**9)) 
             self.timeTrack += config.tChannelAloc + dataTransTime #insert addition parameters
             #self.transmitted = True
 

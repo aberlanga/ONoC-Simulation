@@ -57,7 +57,7 @@ def mapping(key, benchmark):
         row[0]=key[row[0]]
         row[1]=key[row[1]]
 
-        return benchmark
+    return benchmark
 
 
 
@@ -71,7 +71,7 @@ def mapping(key, benchmark):
 
 def writeResults(logFile, tClocks,tSimulation, tProgram, currentReconfiguration):
     with open('results.log',"a") as resultFile:
-        resultFile.write(logFile + '    ' + currentReconfiguration + str(tClocks) + '    ' + str(tSimulation) + '    ' + str(tProgram) + '\n')
+        resultFile.write(logFile + '    ' + currentReconfiguration + '    ' + str(tClocks) + '    ' + str(tSimulation) + '    ' + str(tProgram) + '\n')
 
 
 
@@ -82,12 +82,17 @@ def writeResults(logFile, tClocks,tSimulation, tProgram, currentReconfiguration)
 randKey1  = generateKey(config.nodeCount)         
 randKey2  = generateKey(config.nodeCount)
 randKey3  = generateKey(config.nodeCount)
+
+print randKey1
+print randKey2
+print randKey3
+
 currentReconfiguration = ""
 
 for i in range(0,len(config.benchmarks)):
     logFile = config.benchmarks[i]    
     ConstnodeBenchmarkList = convXYtoNode(logFile)
-    listLen = len(nodeBenchmarkList)
+    listLen = len(ConstnodeBenchmarkList)
     print config.benchmarksOnly[i]
     print '-----------------' + '\n'
     print 'ListLength:' + str(listLen)
@@ -102,24 +107,29 @@ for i in range(0,len(config.benchmarks)):
         t = 0
         if reconfigs == 0:
             currentReconfiguration = "Numerical"
+            
 
-        elif reconfigs == 1:
+        if reconfigs == 1:
             nodeBenchmarkList = mapping(randKey1,nodeBenchmarkList)
             currentReconfiguration = "Random1"
 
-        elif reconfigs == 2:
+        if reconfigs == 2:
             nodeBenchmarkList = mapping(randKey2,nodeBenchmarkList)
             currentReconfiguration = "Random2"
 
-        elif reconfigs == 3:
+        if reconfigs == 3:
             nodeBenchmarkList = mapping(randKey3,nodeBenchmarkList)
             currentReconfiguration = "Random3"
 
-        elif reconfigs == 4:
+        if reconfigs == 4:
             nNKey = nn.nearestNeighbourKeygen(nodeBenchmarkList)
             nodeBenchmarkList = mapping(nNKey,nodeBenchmarkList)
             currentReconfiguration = "nNeighbor"
-
+	
+	print currentReconfiguration
+	for j in range(10):
+	      print nodeBenchmarkList[j]
+	      
         while config.isover == False:
             while  (t == nodeBenchmarkList[reqCount][4] and endFlag==False):
                 if reqCount+1 == listLen:
