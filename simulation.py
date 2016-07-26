@@ -69,9 +69,9 @@ def mapping(key, benchmark):
 
 
 
-def writeResults(logFile, tClocks,tSimulation, tProgram, currentReconfiguration):
+def writeResults(logFile, tClocks,tSimulation, tProgram, currentReconfiguration,comCost):
     with open('results.log',"a") as resultFile:
-        resultFile.write(logFile + '    ' + currentReconfiguration + '    ' + str(tClocks) + '    ' + str(tSimulation) + '    ' + str(tProgram) + '\n')
+        resultFile.write(logFile + '    ' + currentReconfiguration + '    ' + str(tClocks) + '    ' + str(comCost) + '    ' + str(tSimulation) + '    ' + str(tProgram) + '\n')
 
 
 
@@ -100,6 +100,7 @@ for i in range(0,len(config.benchmarks)):
         endFlag = False
         config.isover = False
         config.nodestate = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        config.comCost = 0
 
         t = 0
         if reconfigs == 0:
@@ -137,12 +138,14 @@ for i in range(0,len(config.benchmarks)):
 
 
         tProgram = time.time()-startTime
+        print '\n'
         print config.nodestate 
         print '\n'
         print "Reconfiguration: " + currentReconfiguration
         print 'Optical Clock Cycles: '+ str(t)
         totalTime = float(t)/(config.OCC*(10**9))
         print 'Runtime: '+ str(totalTime) +'seconds' 
+        print 'Communication Cost:' +str(config.comCost) 
         print 'Time for Traffic: ' + str(tProgram)
 
-        writeResults(config.benchmarksOnly[i], t,totalTime, tProgram,currentReconfiguration)
+        writeResults(config.benchmarksOnly[i], t,totalTime, tProgram,currentReconfiguration,config.comCost)

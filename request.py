@@ -34,6 +34,7 @@ class request:
                 self.scheduled = True
                 self.timeTrack += config.tInitialize # insert time parameters
                 self.right = True
+                config.comCost += ((self.destNode - self.sourceNode)-1) * self.volume * config.packetSize
                 
 
 
@@ -44,6 +45,7 @@ class request:
                             config.nodestate[i] = 1
                     self.scheduled = True
                     self.timeTrack += config.tInitialize # insert time parameters
+                    config.comCost += (((config.nodeCount - self.destNode) + self.sourceNode)-1) * self.volume * config.packetSize
                 else:
                     self.timeTrack += 1
             else:
@@ -55,12 +57,16 @@ class request:
                         config.nodestate[i] = 1
                 self.scheduled = True
                 self.timeTrack += config.tInitialize # insert time parameters
+                config.comCost += (((config.nodeCount - self.destNode) + self.sourceNode)-1) * self.volume * config.packetSize
+                
             elif (self.destNode - self.sourceNode) < config.weighted_cutoff:
                 if config.nodestate[self.sourceNode:(self.destNode +1)] == [0] * (self.destNode +1 - self.sourceNode):     
                     config.nodestate[self.sourceNode:(self.destNode +1)] = [1] * ((self.destNode +1) - self.sourceNode)
                     self.scheduled = True
                     self.timeTrack += config.tInitialize # insert time parameters
                     self.right = True
+                    config.comCost += ((self.destNode - self.sourceNode)-1) * self.volume * config.packetSize
+                    
                 else:
                     self.timeTrack += 1
 
