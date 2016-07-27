@@ -18,7 +18,6 @@ for i in range(0,len(benchmarks)):
 
 activeReq = []
 nodestate = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-isover = False
 OCC = 40 #GHz
 ECC = 2 #GHz
 packetSize = 8 #bits
