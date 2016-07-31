@@ -19,8 +19,8 @@ for i in range(0,len(benchmarks)):
 activeReq = []
 nodestate = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 OCC = 40 #GHz
-ECC = 2 #GHz
-packetSize = 8 #bits
+ECC = 2  #GHz
+packetSize = 1024 #bits
 nodeCount = 16
 weighted_cutoff = 9 # max nodes allowed to be bypassed on furthest path
 comCost = 0

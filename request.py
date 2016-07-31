@@ -17,7 +17,7 @@ class request:
 
 
 
-    def schedule(self):
+    def schedule(self,t):
 		# makes source lower than destination
         if self.sourceNode > self.destNode:
             temp = self.sourceNode
@@ -32,7 +32,7 @@ class request:
             if (config.nodestate[self.sourceNode:(self.destNode +1)] == [False] * (self.destNode +1 - self.sourceNode)):     
                 config.nodestate[self.sourceNode:(self.destNode +1)] = [1] * ((self.destNode +1) - self.sourceNode)
                 self.scheduled = True
-                self.timeTrack += config.tInitialize # insert time parameters
+                self.timeTrack = t + config.tInitialize # insert time parameters
                 self.right = True
                 config.comCost += ((self.destNode - self.sourceNode)-1) * self.volume * config.packetSize
                 
@@ -44,38 +44,38 @@ class request:
                         if i <= self.sourceNode | i >= self.destNode:
                             config.nodestate[i] = 1
                     self.scheduled = True
-                    self.timeTrack += config.tInitialize # insert time parameters
+                    self.timeTrack = t + config.tInitialize # insert time parameters
                     config.comCost += (((config.nodeCount - self.destNode) + self.sourceNode)-1) * self.volume * config.packetSize
                     
                 else:
-                    self.timeTrack += 1
+                    self.timeTrack += 1*config.EccToOcc
             else:
-                self.timeTrack += 1
+                self.timeTrack += 1*config.EccToOcc
         else:
             if (config.nodestate[0:(self.sourceNode +1)] == [False] * (self.sourceNode +1)) & (config.nodestate[self.destNode:] == [False] * (config.nodeCount - self.destNode)):
                 for i in config.nodestate:
                     if i <= self.sourceNode | i >= self.destNode:
                         config.nodestate[i] = 1
                 self.scheduled = True
-                self.timeTrack += config.tInitialize # insert time parameters
+                self.timeTrack = t + config.tInitialize # insert time parameters
                 config.comCost += (((config.nodeCount - self.destNode) + self.sourceNode)-1) * self.volume * config.packetSize
             elif (self.destNode - self.sourceNode) < config.weighted_cutoff:
                 if config.nodestate[self.sourceNode:(self.destNode +1)] == [False] * (self.destNode +1 - self.sourceNode):     
                     config.nodestate[self.sourceNode:(self.destNode +1)] = [1] * ((self.destNode +1) - self.sourceNode)
                     self.scheduled = True
-                    self.timeTrack += config.tInitialize # insert time parameters
+                    self.timeTrack = t + config.tInitialize # insert time parameters
                     self.right = True
                     config.comCost += ((self.destNode - self.sourceNode)-1) * self.volume * config.packetSize
                 else:
-                    self.timeTrack += 1
+                    self.timeTrack += 1*config.EccToOcc
 
             else:
-                self.timeTrack += 1
+                self.timeTrack += 1*config.EccToOcc
 
 
         #Transmission here
         if self.scheduled == True:
-            dataTransTime = self.volume*config.packetSize/(config.OCC*(10**9)) 
+            dataTransTime = self.volume*config.packetSize
             self.timeTrack += config.tChannelAloc + dataTransTime #insert addition parameters
             #self.transmitted = True
 
@@ -108,7 +108,7 @@ class request:
 
     def reqProcessing(self, t):
         if self.scheduled == False:
-            self.schedule()
+            self.schedule(t)
             
         # if (self.transmitted == False) & self.scheduled == True):
         #     self.transmit()

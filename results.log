@@ -1,0 +1,44 @@
+Test 1
+-----------------------------------------------------------------------------------------------------------
+flow_swaptions.log.txt    Numerical    9712671    0.00048563355    14851328    15        15.1899220943
+flow_swaptions.log.txt    Random1    9712671    0.00048563355    32551296    16        15.682705164
+flow_swaptions.log.txt    Random2    9712671    0.00048563355    49610752    84        25.7672610283
+flow_swaptions.log.txt    Random3    9712671    0.00048563355    67029632    15        15.6487920284
+flow_swaptions.log.txt    nNeighbor    9712671    0.00048563355    83848064    86        57.5504858494
+flow_dedup.log.txt    Numerical    4372051    0.00021860255    101054976    57        12.4451260567
+flow_dedup.log.txt    Random1    4372051    0.00021860255    117285504    153        19.8264029026
+flow_dedup.log.txt    Random2    4372051    0.00021860255    132758400    71        11.285599947
+flow_dedup.log.txt    Random3    4372051    0.00021860255    148371072    73        10.8552789688
+flow_dedup.log.txt    nNeighbor    4372051    0.00021860255    165313792    153        43.3131029606
+flow_freqmine.log.txt    Numerical    6118891    0.00030594455    170107648    17        9.56841492653
+flow_freqmine.log.txt    Random1    6118891    0.00030594455    174631424    24        9.89986395836
+flow_freqmine.log.txt    Random2    6118891    0.00030594455    178713088    18        9.73988008499
+flow_freqmine.log.txt    Random3    6118891    0.00030594455    183500544    18        9.69919991493
+flow_freqmine.log.txt    nNeighbor    6118891    0.00030594455    188151936    18        11.2240350246
+flow_canneal.log.txt    Numerical    5007491    0.00025037455    286898688    48        63.0485038757
+flow_canneal.log.txt    Random1    5007491    0.00025037455    386283264    47        57.5816719532
+flow_canneal.log.txt    Random2    5007491    0.00025037455    483638528    80        106.779202223
+flow_canneal.log.txt    Random3    5007501    0.00025037505    581892736    47        55.2562861443
+flow_canneal.log.txt    nNeighbor    5007501    0.00025037505    679691904    86        366.215950012
+flow_vips.log.txt    Numerical    16098491    0.00080492455    719565184    29        31.9953849316
+flow_vips.log.txt    Random1    16098491    0.00080492455    762926208    30        34.6916270256
+flow_vips.log.txt    Random2    16098491    0.00080492455    804024448    28        32.6963629723
+flow_vips.log.txt    Random3    16098491    0.00080492455    845624320    29        32.5989699364
+flow_vips.log.txt    nNeighbor    16098491    0.00080492455    888579328    31        45.1103169918
+flow_blackscholes.log.txt    Numerical    1082601    5.413005e-05    896249984    22        3.08038401604
+flow_blackscholes.log.txt    Random1    1082601    5.413005e-05    904275712    42        5.47053194046
+flow_blackscholes.log.txt    Random2    1082601    5.413005e-05    912031488    32        4.262996912
+flow_blackscholes.log.txt    Random3    1082601    5.413005e-05    919905792    48        5.89397907257
+flow_blackscholes.log.txt    nNeighbor    1082601    5.413005e-05    927606528    24        7.1358499527
+flow_barnes.log.txt    Numerical    11519701    0.00057598505    1048487808    44        46.070595026
+flow_barnes.log.txt    Random1    11519701    0.00057598505    1168106880    37        77.1731879711
+flow_barnes.log.txt    Random2    11519701    0.00057598505    1290609792    30        44.9882791042
+flow_barnes.log.txt    Random3    11519701    0.00057598505    1411985408    48        48.8781590462
+flow_barnes.log.txt    nNeighbor    11519701    0.00057598505    1533609728    35        99.257160902
+
+Test 2
+---------------------------------------------------------------------------------------------------------
+flow_swaptions.log.txt    Numerical    19439073    0.000485976825    118810624    1315        6499.9776752
+flow_swaptions.log.txt    Numerical    19439073    0.000485976825    118810624    1315        6468.77320504
+flow_swaptions.log.txt    Random1    27338394    0.00068345985    236088320    3277        150816.927723
+flow_swaptions.log.txt    Numerical    9828180    0.0002457045    118810624    4862.11925602
