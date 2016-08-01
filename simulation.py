@@ -59,9 +59,21 @@ def mapping(key, benchmark):
 
     return benchmark
 
+def createNNKeyDict(keyDict):
+    with open(keyDict,"r") as nnKeyDict:
+	nnDictKey = []
+	for line in nnKeyDict:
+	    dictLine = []
+	    Dictitems = line.split()
+	    for i in Dictitems:
+		dictLine.append(i)
+	    nnDictKey.append(dictLine)
+    return nnDictKey
 
-
-
+def generateNNKey(benchmarkName,nnDictKey):
+    for i in nnDictKey:
+	if benchmarkName == nnDictKey[i][0]:
+	    return nnDictKey[i][1]
 
 
 
@@ -82,7 +94,10 @@ def writeResults(logFile, tClocks,tSimulation, tProgram, currentReconfiguration,
 randKey1  = generateKey(config.nodeCount)         
 randKey2  = generateKey(config.nodeCount)
 randKey3  = generateKey(config.nodeCount)
+nnDictKey = createNNKeyDict('nnKeyDictionary.log')
 
+for i in range(len(nnDictKey)):
+    print nnDictKey[i]
 
 currentReconfiguration = ""
 
@@ -103,24 +118,24 @@ for i in range(0,len(config.benchmarks)):
         maxActiveReqLen = 0
 
         t = 0
-        if reconfigs == 0:
-            currentReconfiguration = "Numerical"
-            
-
-        if reconfigs == 1:
-            nodeBenchmarkList = mapping(randKey1,nodeBenchmarkList)
-            currentReconfiguration = "Random1"
-
-        if reconfigs == 2:
-            nodeBenchmarkList = mapping(randKey2,nodeBenchmarkList)
-            currentReconfiguration = "Random2"
-
-        if reconfigs == 3:
-            nodeBenchmarkList = mapping(randKey3,nodeBenchmarkList)
-            currentReconfiguration = "Random3"
-
+#        if reconfigs == 0:
+#            currentReconfiguration = "Numerical"
+#            
+#
+#        if reconfigs == 1:
+#            nodeBenchmarkList = mapping(randKey1,nodeBenchmarkList)
+#            currentReconfiguration = "Random1"
+#
+#        if reconfigs == 2:
+#            nodeBenchmarkList = mapping(randKey2,nodeBenchmarkList)
+#            currentReconfiguration = "Random2"
+#
+#        if reconfigs == 3:
+#            nodeBenchmarkList = mapping(randKey3,nodeBenchmarkList)
+#            currentReconfiguration = "Random3"
+#
         if reconfigs == 4:
-            nNKey = nn.nearestNeighbourKeygen(nodeBenchmarkList)
+            nNKey = generateNNKey(config.benchmarksOnly,nnDictKey)
             nodeBenchmarkList = mapping(nNKey,nodeBenchmarkList)
             currentReconfiguration = "nNeighbor"
 

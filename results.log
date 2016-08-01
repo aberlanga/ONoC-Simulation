@@ -38,7 +38,9 @@ flow_barnes.log.txt    nNeighbor    11519701    0.00057598505    1533609728    3
 
 Test 2
 ---------------------------------------------------------------------------------------------------------
-flow_swaptions.log.txt    Numerical    19439073    0.000485976825    118810624    1315        6499.9776752
-flow_swaptions.log.txt    Numerical    19439073    0.000485976825    118810624    1315        6468.77320504
-flow_swaptions.log.txt    Random1    27338394    0.00068345985    236088320    3277        150816.927723
-flow_swaptions.log.txt    Numerical    9828180    0.0002457045    118810624    4862.11925602
+packtsize 4
+flow_swaptions.log.txt    Numerical    455760    1.1394e-05    464104    421.146348953
+flow_swaptions.log.txt    Random1    1295580    3.23895e-05    967228    1416.84671712
+flow_swaptions.log.txt    Random2    689220    1.72305e-05    1530236    769.56217289
+flow_swaptions.log.txt    Random3    1348780    3.37195e-05    1952240    1411.19728112
+flow_swaptions.log.txt    nNeighbor    1193100    2.98275e-05    2449440    3712.70035005
